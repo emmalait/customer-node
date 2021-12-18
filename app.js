@@ -1,4 +1,3 @@
-
 const config = require('./utils/config')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -18,27 +17,18 @@ if (process.env.NODE_ENV === 'production') {
     url: process.env.DATABASE_URL,
     dialect: 'postgres',
     protocol: 'postgres',
-    /*
-    ssl: true,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    },
-    */
   })
 } else {
   sequelize = new Sequelize({
     url: config.DATABASE_URL,
-    dialect: 'postgres'
+    dialect: 'postgres',
   })
 }
 
 console.log('Syncing Sequelize...')
 sequelize.sync()
 
-morgan.token('postdata', req => {
+morgan.token('postdata', (req) => {
   return JSON.stringify(req.body)
 })
 
@@ -49,7 +39,7 @@ sequelize
   .then(() => {
     console.log('Connected to database')
   })
-  .catch(err => {
+  .catch((err) => {
     console.log('Error connecting to database: ', err)
   })
 

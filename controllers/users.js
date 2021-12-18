@@ -3,7 +3,6 @@ const usersRouter = require('express').Router()
 const User = require('../models').User
 
 usersRouter.get('/:id', (request, response) => {
-  console.log('in usersRouter')
   const id = Number(request.params.id)
 
   User.scope('withoutPassword')
